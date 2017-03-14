@@ -17,6 +17,7 @@ using namespace std;
 struct Item_Type
 {
     string name;
+    string key;
     int quantity;
 };
 
