@@ -16,9 +16,9 @@
 using namespace std;
 struct Item
 {
-    string name;
-    string key;
-    int quantity;
+    string Name;
+    string Key;
+    int Quantity;
 };
 
 

@@ -56,9 +56,9 @@ int Inventory:: Get_Quantity(string key)
 {
     for (int i = 0; i < length; i++)
     {
-        if (inventory[i].key == key)
+        if (inventory[i].Key == key)
         {
-            return inventory[i].quantity;
+            return inventory[i].Quantity;
         }
     }
     return -1;
@@ -73,9 +73,9 @@ void Inventory:: Update_Quantity(string key, int new_quantity)
 {
     for (int i = 0; i < length; i++)
     {
-        if (inventory[i].key == key)
+        if (inventory[i].Key == key)
         {
-            inventory[i].quantity += new_quantity;
+            inventory[i].Quantity += new_quantity;
         }
     }
 }
@@ -88,7 +88,7 @@ void Inventory:: Delete_Item(string key)
 {
     for (int i = 0; i < length; i++)
     {
-        if (inventory[i].key == key)
+        if (inventory[i].Key == key)
         {
             Item temp = inventory[i + 1];
             inventory[i + 1] = inventory[i];
@@ -129,9 +129,9 @@ void Inventory:: Print_Inventory(int order_code, bool ascending_order)
     for (int i = 0; i < length; i++)
     {
         cout << "item #" << i + 1 << "\n";
-        cout << "item name: " << inventory[i].name << "\n";
-        cout << "item key: " << inventory[i].key << "\n";
-        cout << "item quantity: " << inventory[i].quantity << "\n\n";
+        cout << "item name: " << inventory[i].Name << "\n";
+        cout << "item key: " << inventory[i].Key << "\n";
+        cout << "item quantity: " << inventory[i].Quantity << "\n\n";
     }
 }
 
@@ -145,7 +145,7 @@ void Inventory:: Ascending_Sort_Inventory_By_Name()
     {
         for (int j = 0; j < length; j++)
         {
-            if (inventory[i].name < inventory[j].name) {
+            if (inventory[i].Name < inventory[j].Name) {
                 Item temp = inventory[i];
                 inventory[i] = inventory[j];
                 inventory[j] = temp;
@@ -164,7 +164,7 @@ void Inventory:: Ascending_Sort_Inventory_By_Key()
     {
         for (int j = 0; j < length; j++)
         {
-            if (inventory[i].key < inventory[j].key) {
+            if (inventory[i].Key < inventory[j].Key) {
                 Item temp = inventory[i];
                 inventory[i] = inventory[j];
                 inventory[j] = temp;
@@ -183,7 +183,7 @@ void Inventory:: Descending_Sort_Inventory_By_Name()
     {
         for (int j = 0; j < length; j++)
         {
-            if (inventory[i].name > inventory[j].name) {
+            if (inventory[i].Name > inventory[j].Name) {
                 Item temp = inventory[i];
                 inventory[i] = inventory[j];
                 inventory[j] = temp;
@@ -202,7 +202,7 @@ void Inventory:: Descending_Sort_Inventory_By_Key()
     {
         for (int j = 0; j < length; j++)
         {
-            if (inventory[i].key > inventory[j].key) {
+            if (inventory[i].Key > inventory[j].Key) {
                 Item temp = inventory[i];
                 inventory[i] = inventory[j];
                 inventory[j] = temp;

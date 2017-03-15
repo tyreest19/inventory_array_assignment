@@ -66,9 +66,9 @@ Item Create_Item()
     quantity = User_Inputted_Number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
     
     Item created_item;
-    created_item.quantity = quantity;
-    created_item.name = name;
-    created_item.key = key;
+    created_item.Quantity = quantity;
+    created_item.Name = name;
+    created_item.Key = key;
     
     return created_item;
 }
