@@ -22,18 +22,21 @@ class Inventory
 public:
     
     Inventory();
-    bool is_empty();
-    void add_new_item(Item new_item);
-    void create_investory(int desired_upper_bound);
-    int get_quantity(string key);
-    void update_quantity(string key, int new_quantity);
-    void delete_item(string key);
-    void print_inventory();
+    bool Is_Empty();
+    void Add_New_Item(Item new_item);
+    void Create_Investory(int desired_upper_bound);
+    int Get_Quantity(string key);
+    void Update_Quantity(string key, int new_quantity);
+    void Delete_Item(string key);
+    void Print_Inventory(int order_code, bool ascending_order);
 private:
     
     int length;
     int upper_bounds;
-    void sort_inventory();
+    void Ascending_Sort_Inventory_By_Name();
+    void Descending_Sort_Inventory_By_Name();
+    void Ascending_Sort_Inventory_By_Key();
+    void Descending_Sort_Inventory_By_Key();
     Item inventory[MAXIMUM_INVETORY_SIZE];
 };
 #endif /* Inventory_hpp */

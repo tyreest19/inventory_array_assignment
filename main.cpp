@@ -26,30 +26,34 @@ const string INVENTORY_INVALID_SIZE = "Enter a number between 1 and 100!\n";
 const string MENU_PROMPT = "\n1. Add new item \n2. Check if inventory is empty \n3. Print inventory \n4. Get item quantity \n5. Update item quantity \n6. Delete item \n\nEnter a number for the action you wish to do on your inventory: ";
 const string MENU_INVALID_BOUNDS = "Please enter a number between 1 and 6!";
 
-Item create_item();
+Item Create_Item();
 int String_To_Int(const char *str);
-void menu(Inventory &inventory);
-int user_inputted_number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds);
+void Menu(Inventory &inventory);
+int User_Inputted_Number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds);
 
 int main()
 {
     cout << "This is an inventory program which minincs an inventory! \n\n";
     
-    int size_of_inventory = user_inputted_number(CREATE_INVENTORY_PROMPT, INVALID_INPUT, INVENTORY_INVALID_SIZE, MINIMUM_INVENTORY_SIZE, MAXIMUM_INVETORY_SIZE);
+    int size_of_inventory = User_Inputted_Number(CREATE_INVENTORY_PROMPT, INVALID_INPUT, INVENTORY_INVALID_SIZE, MINIMUM_INVENTORY_SIZE, MAXIMUM_INVETORY_SIZE);
     Inventory inventory;
     string continue_using_menu;
-    inventory.create_investory(size_of_inventory);
+    inventory.Create_Investory(size_of_inventory);
     
     do
     {
-        menu(inventory);
+        Menu(inventory);
         cout << "\nIf you wish to continue enter yes or YES. If you wish to quit enter anything: ";
         getline(cin, continue_using_menu);
     } while (continue_using_menu == "YES" || continue_using_menu == "yes");
     return 0;
 }
 
-Item create_item()
+//============================================================================================
+// Creates a new item.
+//============================================================================================
+
+Item Create_Item()
 {
     string name;
     string key;
@@ -59,7 +63,7 @@ Item create_item()
     getline(cin, name);
     cout << "enter the items key: ";
     getline(cin, key);
-    quantity = user_inputted_number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
+    quantity = User_Inputted_Number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
     
     Item created_item;
     created_item.quantity = quantity;
@@ -110,26 +114,30 @@ int String_To_Int(const char *str)
     return result;
 }
 
-void menu(Inventory &inventory)
+//============================================================================================
+// Allows the user to perform operations on the menu.
+//============================================================================================
+
+void Menu(Inventory &inventory)
 {
-    int user_inputted_action = user_inputted_number(MENU_PROMPT, INVALID_INPUT, MENU_INVALID_BOUNDS, MENU_LOWER_BOUND, MENU_UPPER_BOUND);
+    int user_inputted_action = User_Inputted_Number(MENU_PROMPT, INVALID_INPUT, MENU_INVALID_BOUNDS, MENU_LOWER_BOUND, MENU_UPPER_BOUND);
     cout << "\n";
     
     switch (user_inputted_action)
     {
         case 1:
             {
-            Item new_item = create_item();
-            inventory.add_new_item(new_item);
+            Item new_item = Create_Item();
+            inventory.Add_New_Item(new_item);
             break;
             }
             
         case 2:
-            cout << "Is the invetory empty: " << inventory.is_empty() << " " << endl;
+            cout << "Is the invetory empty: " << inventory.Is_Empty() << " " << endl;
             break;
         
         case 3:
-            inventory.print_inventory();
+            inventory.Print_Inventory(1,true);
             break;
         
         case 4:
@@ -137,7 +145,7 @@ void menu(Inventory &inventory)
                 string key;
                 cout << "enter key: ";
                 getline(cin, key);
-                int amount_of_item = inventory.get_quantity(key);
+                int amount_of_item = inventory.Get_Quantity(key);
                 
                 if (amount_of_item == -1)
                 {
@@ -156,8 +164,8 @@ void menu(Inventory &inventory)
                 string key;
                 cout << "enter key: ";
                 getline(cin, key);
-                int new_amount = user_inputted_number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
-                inventory.update_quantity(key, new_amount);
+                int new_amount = User_Inputted_Number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
+                inventory.Update_Quantity(key, new_amount);
                 break;
             }
             
@@ -166,7 +174,7 @@ void menu(Inventory &inventory)
                 string key;
                 cout << "enter key: ";
                 getline(cin, key);
-                inventory.delete_item(key);
+                inventory.Delete_Item(key);
                 break;
             }
             
@@ -175,7 +183,12 @@ void menu(Inventory &inventory)
     }
 }
 
-int user_inputted_number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds)
+//============================================================================================
+// Takes user inputted number as a string and returns the number if its fits the parameters.
+// If the number does not fit the parameters the user is prompted to enter a new number.
+//============================================================================================
+
+int User_Inputted_Number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds)
 {
     int number = -1;
     string user_entered_number;
