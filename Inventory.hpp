@@ -16,10 +16,12 @@
 using namespace std;
 const int MAXIMUM_INVETORY_SIZE = 100;
 
+
 class Inventory
 {
 public:
     
+    Inventory();
     bool is_empty();
     void add_new_item(Item_Type new_item);
     void create_investory(int desired_upper_bound);

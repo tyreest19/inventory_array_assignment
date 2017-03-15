@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <string>
-#include "Item_Type.hpp"
+//#include "Item_Type.hpp"
 #include "Inventory.hpp"
 using namespace std;
 
@@ -23,8 +23,9 @@ const string INVALID_INPUT = "Please enter a number!";
 const string ITEM_INVALID_QUANTITY = "Item quantity is out of range!";
 const string CREATE_INVENTORY_PROMPT = "enter the size of the inventory must be up to 100: ";
 const string INVENTORY_INVALID_SIZE = "Enter a number between 0 and 100!";
-const string MENU_PROMPT = "1. Add new item \n2. Check if inventory is empty \n3. Print inventory \n4. Get item quantity \n5. Update item quantity \n6. Delete item \n";
+const string MENU_PROMPT = "\n1. Add new item \n2. Check if inventory is empty \n3. Print inventory \n4. Get item quantity \n5. Update item quantity \n6. Delete item \n";
 const string MENU_INVALID_BOUNDS = "Please enter a number between 1 and 6!";
+
 Item_Type create_item();
 int String_To_Int(const char *str);
 void menu(Inventory &inventory);
@@ -32,7 +33,9 @@ int user_inputted_number(string prompt, string invalid_prompt, string out_of_bou
 
 int main()
 {
-    int size_of_inventory = user_inputted_number(CREATE_INVENTORY_PROMPT, INVALID_INPUT, INVENTORY_INVALID_SIZE, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
+    cout << "This is an inventory program which minincs an inventory \n";
+    
+    int size_of_inventory = user_inputted_number(CREATE_INVENTORY_PROMPT, INVALID_INPUT, INVENTORY_INVALID_SIZE, MINIMUM_INVENTORY_SIZE, MAXIMUM_INVETORY_SIZE);
     Inventory inventory;
     string continue_using_menu;
     inventory.create_investory(size_of_inventory);
@@ -40,7 +43,7 @@ int main()
     do
     {
         menu(inventory);
-        cout << "If you wish to continue enter yes or YES. If you wish to quit enter anything \n";
+        cout << "\nIf you wish to continue enter yes or YES. If you wish to quit enter anything: ";
         getline(cin, continue_using_menu);
     } while (continue_using_menu == "YES" || continue_using_menu == "yes");
     return 0;
@@ -59,9 +62,9 @@ Item_Type create_item()
     quantity = user_inputted_number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
     
     Item_Type created_item;
+    created_item.quantity = quantity;
     created_item.name = name;
     created_item.key = key;
-    created_item.quantity = quantity;
     
     return created_item;
 }
@@ -98,6 +101,7 @@ int String_To_Int(const char *str)
 
 void menu(Inventory &inventory)
 {
+    cout << "Enter a number for the action you wish to do on your inventory \n";
     int user_inputted_action = user_inputted_number(MENU_PROMPT, INVALID_INPUT, MENU_INVALID_BOUNDS, MENU_LOWER_BOUND, MENU_UPPER_BOUND);
     
     switch (user_inputted_action)
@@ -133,6 +137,7 @@ void menu(Inventory &inventory)
                 {
                     cout << "The items quanity is " << amount_of_item << "\n";
                 }
+                break;
             }
             
         case 5:
@@ -142,6 +147,7 @@ void menu(Inventory &inventory)
                 getline(cin, key);
                 int new_amount = user_inputted_number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
                 inventory.update_quantity(key, new_amount);
+                break;
             }
             
         default:
@@ -154,7 +160,7 @@ int user_inputted_number(string prompt, string invalid_prompt, string out_of_bou
     int number = -1;
     string user_entered_number;
 
-    while (number == -1 && number >= lower_bounds && number <= upper_bounds)
+    while (number == -1 || (number < lower_bounds && number > upper_bounds))
     {
         cout << prompt;
         getline(cin, user_entered_number);
@@ -162,12 +168,12 @@ int user_inputted_number(string prompt, string invalid_prompt, string out_of_bou
         
         if (number == -1)
         {
-            cout << invalid_prompt;
+            cout << invalid_prompt << "\n";
         }
         
-        else if (number >= lower_bounds && number <= upper_bounds)
+        else if (number < lower_bounds && number > upper_bounds)
         {
-            cout << out_of_bounds_prompt;
+            cout << out_of_bounds_prompt << "\n";
         }
     }
     

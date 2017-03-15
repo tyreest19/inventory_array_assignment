@@ -21,4 +21,5 @@ struct Item_Type
     int quantity;
 };
 
+
 #endif /* Item_Type_hpp */

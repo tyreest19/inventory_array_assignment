@@ -7,21 +7,23 @@
 //
 
 #include "Inventory.hpp"
+#include <iostream>
 
+using namespace std;
+Inventory:: Inventory()
+{
+    length = 0;
+}
 bool Inventory:: is_empty()
 {
-    return length >= 1;
+    return length == 0;
 }
 
 void Inventory:: add_new_item(Item_Type new_item)
 {
-    if (length == 0)
-    {
-        length = 1;
     
-    }
-    
-    inventory[length - 1] = new_item;
+    inventory[length] = new_item;
+    cout << "i was added to the string" << endl;
     length++;
 }
 
