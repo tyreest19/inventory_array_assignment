@@ -22,11 +22,11 @@ const string ITEM_QUANTITY_PROMPT = "Enter the quantity of the item: ";
 const string INVALID_INPUT = "Please enter a number!";
 const string ITEM_INVALID_QUANTITY = "Item quantity is out of range!";
 const string CREATE_INVENTORY_PROMPT = "enter the size of the inventory must be up to 100: ";
-const string INVENTORY_INVALID_SIZE = "Enter a number between 0 and 100!";
-const string MENU_PROMPT = "\n1. Add new item \n2. Check if inventory is empty \n3. Print inventory \n4. Get item quantity \n5. Update item quantity \n6. Delete item \nEnter a number for the action you wish to do on your inventory: ";
+const string INVENTORY_INVALID_SIZE = "Enter a number between 1 and 100!\n";
+const string MENU_PROMPT = "\n1. Add new item \n2. Check if inventory is empty \n3. Print inventory \n4. Get item quantity \n5. Update item quantity \n6. Delete item \n\nEnter a number for the action you wish to do on your inventory: ";
 const string MENU_INVALID_BOUNDS = "Please enter a number between 1 and 6!";
 
-Item_Type create_item();
+Item create_item();
 int String_To_Int(const char *str);
 void menu(Inventory &inventory);
 int user_inputted_number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds);
@@ -49,7 +49,7 @@ int main()
     return 0;
 }
 
-Item_Type create_item()
+Item create_item()
 {
     string name;
     string key;
@@ -61,7 +61,7 @@ Item_Type create_item()
     getline(cin, key);
     quantity = user_inputted_number(ITEM_QUANTITY_PROMPT, INVALID_INPUT, ITEM_INVALID_QUANTITY, MINIMUM_QUANTITY, MAXIMUM_QUANTITY);
     
-    Item_Type created_item;
+    Item created_item;
     created_item.quantity = quantity;
     created_item.name = name;
     created_item.key = key;
@@ -77,13 +77,19 @@ Item_Type create_item()
 int String_To_Int(const char *str)
 {
     int result = 0;
+    int prefix = 0;
     
     if (str[0] == '\0')
     {
         return -1;
     }
     
-    for (int i = 0; str[i] != '\0'; ++i)
+    else if (str[0] == '-' || str[0] == '+')
+    {
+        prefix = 1;
+    }
+    
+    for (int i = prefix; str[i] != '\0'; ++i)
     {
         if ('0' <= str[i] && str[i] <= '9')
         {
@@ -94,6 +100,11 @@ int String_To_Int(const char *str)
         {
             return -1;
         }
+    }
+    
+    if (str[0] == '-')
+    {
+        result *= -1;
     }
     
     return result;
@@ -108,7 +119,7 @@ void menu(Inventory &inventory)
     {
         case 1:
             {
-            Item_Type new_item = create_item();
+            Item new_item = create_item();
             inventory.add_new_item(new_item);
             break;
             }
@@ -150,6 +161,15 @@ void menu(Inventory &inventory)
                 break;
             }
             
+        case 6:
+            {
+                string key;
+                cout << "enter key: ";
+                getline(cin, key);
+                inventory.delete_item(key);
+                break;
+            }
+            
         default:
             break;
     }
@@ -160,18 +180,18 @@ int user_inputted_number(string prompt, string invalid_prompt, string out_of_bou
     int number = -1;
     string user_entered_number;
 
-    while (number == -1 || (number < lower_bounds && number > upper_bounds))
+    while (number == -1 || (number < lower_bounds || number > upper_bounds))
     {
         cout << prompt;
         getline(cin, user_entered_number);
         number = String_To_Int(user_entered_number.c_str());
-        
+        cout << "\n";
         if (number == -1)
         {
             cout << invalid_prompt << "\n";
         }
         
-        else if (number < lower_bounds && number > upper_bounds)
+        else if (number < lower_bounds || number > upper_bounds)
         {
             cout << out_of_bounds_prompt << "\n";
         }

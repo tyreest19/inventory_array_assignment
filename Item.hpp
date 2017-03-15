@@ -14,7 +14,7 @@
 #include <iostream>
 
 using namespace std;
-struct Item_Type
+struct Item
 {
     string name;
     string key;

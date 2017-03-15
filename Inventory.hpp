@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <string>
-#include "Item_Type.hpp"
+#include "Item.hpp"
 
 using namespace std;
 const int MAXIMUM_INVETORY_SIZE = 100;
@@ -23,7 +23,7 @@ public:
     
     Inventory();
     bool is_empty();
-    void add_new_item(Item_Type new_item);
+    void add_new_item(Item new_item);
     void create_investory(int desired_upper_bound);
     int get_quantity(string key);
     void update_quantity(string key, int new_quantity);
@@ -33,6 +33,7 @@ private:
     
     int length;
     int upper_bounds;
-    Item_Type inventory[MAXIMUM_INVETORY_SIZE];
+    void sort_inventory();
+    Item inventory[MAXIMUM_INVETORY_SIZE];
 };
 #endif /* Inventory_hpp */
