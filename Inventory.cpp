@@ -21,9 +21,14 @@ bool Inventory:: is_empty()
 
 void Inventory:: add_new_item(Item_Type new_item)
 {
-    
-    inventory[length] = new_item;
-    cout << "i was added to the string" << endl;
+    if (length == upper_bounds)
+    {
+        cout << "Cannot append new item to inventory array is full \n";
+    }
+    else
+    {
+        inventory[length] = new_item;
+    }
     length++;
 }
 
@@ -67,6 +72,6 @@ void Inventory:: print_inventory()
         cout << "item #" << i + 1 << "\n";
         cout << "item name: " << inventory[i].name << "\n";
         cout << "item key: " << inventory[i].key << "\n";
-        cout << "item quantity: " << inventory[i].quantity << "\n";
+        cout << "item quantity: " << inventory[i].quantity << "\n\n";
     }
 }
