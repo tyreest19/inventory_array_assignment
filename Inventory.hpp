@@ -30,6 +30,7 @@ public:
     void Delete_Item(string key);
     void Print_Inventory(int order_code, bool ascending_order);
     bool Is_Full();
+    bool Does_Item_Exist(string key);
 private:
     
     int length;

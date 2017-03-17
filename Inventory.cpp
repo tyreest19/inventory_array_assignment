@@ -29,6 +29,10 @@ bool Inventory:: Is_Empty()
     return length == 0;
 }
 
+//============================================================================================
+// Pass in an Item and the method adds it to a inventory.
+//============================================================================================
+
 void Inventory:: Add_New_Item(Item new_item)
 {
         inventory[length] = new_item;
@@ -43,6 +47,10 @@ void Inventory:: Create_Investory(int desired_upper_bound)
 {
     upper_bounds = desired_upper_bound;
 }
+
+//============================================================================================
+// Enter the key for an item and the method returns the Quantity.
+//============================================================================================
 
 int Inventory:: Get_Quantity(string key)
 {
@@ -212,4 +220,21 @@ void Inventory:: Descending_Sort_Inventory_By_Key()
 bool Inventory:: Is_Full()
 {
     return length == upper_bounds;
+}
+
+//============================================================================================
+// Checks if the an Item exist in the inventory.
+//============================================================================================
+
+bool Inventory:: Does_Item_Exist(string key)
+{
+    bool item_found = false;
+    for (int i = 0; i < length && !item_found; i++)
+    {
+        if (inventory[i].Key == key)
+        {
+            item_found = true;
+        }
+    }
+    return item_found;
 }
