@@ -158,8 +158,8 @@ void Menu(Inventory &inventory)
         
         case 3:
             {
-                int name_or_key = User_Inputted_Number(PROMPT_BY_KEY_OR_NAME, INVALID_INPUT_ORDER_PROMPTS, INVALID_INPUT_ORDER_PROMPTS, 1, 2);
-                int descending_or_ascending = User_Inputted_Number(PROMPT_SORT_ASCENDING_OR_DESCENDING, INVALID_INPUT_ORDER_PROMPTS, INVALID_INPUT_ORDER_PROMPTS, 0, 1);
+                int name_or_key = User_Inputted_Number(PROMPT_BY_KEY_OR_NAME, INVALID_INPUT_ORDER_PROMPTS, INVALID_INPUT_ORDER_PROMPTS, SORT_BY_NAME, SORT_BY_KEY);
+                int descending_or_ascending = User_Inputted_Number(PROMPT_SORT_ASCENDING_OR_DESCENDING, INVALID_INPUT_ORDER_PROMPTS, INVALID_INPUT_ORDER_PROMPTS, DESCENDING_ORDER, ASCENDING_ORDER);
             inventory.Print_Inventory(name_or_key, descending_or_ascending);
             break;
             }
