@@ -29,6 +29,7 @@ public:
     void Update_Quantity(string key, int new_quantity);
     void Delete_Item(string key);
     void Print_Inventory(int order_code, bool ascending_order);
+    bool Is_Full();
 private:
     
     int length;

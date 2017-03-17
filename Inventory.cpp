@@ -31,16 +31,8 @@ bool Inventory:: Is_Empty()
 
 void Inventory:: Add_New_Item(Item new_item)
 {
-    if (length == upper_bounds)
-    {
-        cout << "\nCannot append new item to inventory array is full \n";
-    }
-    
-    else
-    {
         inventory[length] = new_item;
         length++;
-    }
 }
 
 //============================================================================================
@@ -209,4 +201,15 @@ void Inventory:: Descending_Sort_Inventory_By_Key()
             }
         }
     }
+}
+
+//============================================================================================
+// Checks if inventory is full.
+// Returns true if full.
+// Returns false if not full.
+//============================================================================================
+
+bool Inventory:: Is_Full()
+{
+    return length == upper_bounds;
 }

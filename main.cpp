@@ -18,6 +18,10 @@ const int MAXIMUM_INVENTORY_SIZE = 100;
 const int MINIMUM_INVENTORY_SIZE = 1;
 const int MENU_LOWER_BOUND = 1;
 const int MENU_UPPER_BOUND = 6;
+const int SORT_BY_NAME = 1;
+const int SORT_BY_KEY = 2;
+const int ASCENDING_ORDER = 1;
+const int DESCENDING_ORDER = 0;
 const string ITEM_QUANTITY_PROMPT = "Enter the quantity of the item: ";
 const string INVALID_INPUT = "Please enter a number!";
 const string ITEM_INVALID_QUANTITY = "Item quantity is out of range!";
@@ -25,6 +29,9 @@ const string CREATE_INVENTORY_PROMPT = "enter the size of the inventory must be 
 const string INVENTORY_INVALID_SIZE = "Enter a number between 1 and 100!\n";
 const string MENU_PROMPT = "\n1. Add new item \n2. Check if inventory is empty \n3. Print inventory \n4. Get item quantity \n5. Update item quantity \n6. Delete item \n\nEnter a number for the action you wish to do on your inventory: ";
 const string MENU_INVALID_BOUNDS = "Please enter a number between 1 and 6!";
+const string PROMPT_BY_KEY_OR_NAME = "Enter 1 to sort by name or enter 2 to sort by key: ";
+const string PROMPT_SORT_ASCENDING_OR_DESCENDING = "Enter 1 to sort by ascending order or enter 0 to sort by descending order: ";
+const string INVALID_INPUT_ORDER_PROMPTS = "Invalid Input !";
 
 Item Create_Item();
 int String_To_Int(const char *str);
@@ -127,18 +134,35 @@ void Menu(Inventory &inventory)
     {
         case 1:
             {
-            Item new_item = Create_Item();
-            inventory.Add_New_Item(new_item);
-            break;
+            if (inventory.Is_Full())
+            {
+                cout << "Cannot add a new item the inventory is full!\n\n";
+            }
+            else
+            {
+                Item new_item = Create_Item();
+                inventory.Add_New_Item(new_item);
+            }
+                break;
             }
             
         case 2:
-            cout << "Is the invetory empty: " << inventory.Is_Empty() << " " << endl;
+            {
+            cout << "Is the invetory empty: ";
+               if (inventory.Is_Empty())
+                    cout << "true\n";
+               else
+                   cout << "false\n";
             break;
+            }
         
         case 3:
-            inventory.Print_Inventory(1,true);
+            {
+                int name_or_key = User_Inputted_Number(PROMPT_BY_KEY_OR_NAME, INVALID_INPUT_ORDER_PROMPTS, INVALID_INPUT_ORDER_PROMPTS, 1, 2);
+                int descending_or_ascending = User_Inputted_Number(PROMPT_SORT_ASCENDING_OR_DESCENDING, INVALID_INPUT_ORDER_PROMPTS, INVALID_INPUT_ORDER_PROMPTS, 0, 1);
+            inventory.Print_Inventory(name_or_key, descending_or_ascending);
             break;
+            }
         
         case 4:
             {
