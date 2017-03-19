@@ -17,7 +17,7 @@ using namespace std;
 
 int main()
 {
-    cout << "This is an inventory program which minincs an inventory! \n\n";
+    cout << "This is an inventory program which mimics an inventory! \n\n";
     
     int size_of_inventory = User_Inputted_Number(CREATE_INVENTORY_PROMPT, INVALID_INPUT, INVENTORY_INVALID_SIZE, MINIMUM_INVENTORY_SIZE, MAXIMUM_INVETORY_SIZE);
     Inventory inventory;
@@ -27,8 +27,9 @@ int main()
     do
     {
         Menu(inventory);
-        cout << "If you wish to continue enter yes or YES. If you wish to quit enter anything: ";
+        cout << "\nIf you wish to continue enter yes or YES. If you wish to quit enter anything: ";
         getline(cin, continue_using_menu);
+        cout << "\n";
     } while (continue_using_menu == "YES" || continue_using_menu == "yes");
     return 0;
 }
